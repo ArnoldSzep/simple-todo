@@ -1,0 +1,19 @@
+$primary: #ff4d6c;
+$secondary: #f6ba52;
+$warning: #e34040;
+
+$gray_dark: #666;
+$gray_darker: #404040;
+$gray_light: #cfcfcf;
+$gray_lighter: #eee;
+$gray_lightest: #f6f6f6;
+
+$base: 16;
+
+@function rem($px, $base: $base) {
+    @return ($px / $base) * 1rem;
+}
+
+@function em($px, $base: $base) {
+    @return ($px / $base) * 1em;
+}

@@ -1,0 +1,85 @@
+@import "mixins";
+
+// defaults
+html {}
+
+body {
+    margin: 0;
+    background: $gray_lightest;
+    color: $gray_darker;
+    position: relative;
+    overflow-x: hidden;
+    font-family: sans-serif;
+}
+
+textarea,
+input {
+    font-family: inherit;
+}
+
+.cl {
+    clear: both;
+    display: block;
+}
+
+button {
+    border: 0;
+    border-radius: rem(6);
+    color: #fff;
+    font-weight: 700;
+    padding: rem(4) rem(40) rem(2);
+    height: rem(46);
+    letter-spacing: rem(1);
+    font-size: rem(16);
+    font-family: inherit;
+    cursor: pointer;
+    background: $primary linear-gradient(90deg, $primary, $secondary);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+
+    &::before {
+        content: '';
+        z-index: -1;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: $primary linear-gradient(-90deg, $primary, $secondary);
+        opacity: 1;
+        transition: opacity .3s;
+    }
+
+    &:hover {
+        &::before {
+            opacity: 0;
+        }
+    }
+
+    &:focus {
+        outline: 0;
+    }
+}
+
+//Bubble
+.bubble {
+    background: $primary linear-gradient(-45deg, $primary, $secondary);
+    border-radius: 50%;
+    box-shadow: 0 0 rem(14) rgba(#000, 0.2);
+    animation: bubble 2.2s 2s infinite alternate ease-in-out;
+
+    .bubble {
+        box-shadow: none;
+    }
+}
+
+@keyframes bubble {
+    0% {
+        transform: scale(1) translateY(0);
+    }
+
+    100% {
+        transform: scale(1.05) translateY(1rem);
+    }
+}

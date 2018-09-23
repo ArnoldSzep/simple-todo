@@ -1,0 +1,73 @@
+<div class="todo-wrap">
+  <div class="todo-inner">
+    <div class="bubble todo-bubble">
+      <div class="bubble todo-bubble_small1"></div>
+      <div class="bubble todo-bubble_small2"></div>
+    </div>
+
+    <div class="todo-title">
+      <h1>
+        Welcome!
+      </h1>
+      <h2>
+        You have <u>{{incomplete}}</u> <br>remaining task<span *ngIf="incomplete > 1">s</span>!
+      </h2>
+    </div>
+
+    <div class="todo-filter">
+      <div class="todo-order" (click)="orderList()">Order: <span>{{order[currOrder]}}</span></div>
+      <div class="todo-show" (click)="filterList()">Show: <span>{{filter[currFilter]}}</span></div>
+    </div>
+
+    <div class="todo-items">
+      <div class="todo-item" *ngFor="let todo of todoData | keyvalue">
+        <div class="todo-item_inner {{todo.value.completed ? 'done' : ''}}" *ngIf="!todo.value.hidden">
+          <div class="todo-priority">
+            <div class="todo-priority_selected todo-priority_selected--{{todo.value.priority}}" (click)="prioritySelect($event)">
+              {{todo.value.priority == 1 ? 'High' : ''}}
+              {{todo.value.priority == 2 ? 'Med' : ''}}
+              {{todo.value.priority == 3 ? 'Low' : ''}}
+            </div>
+            <div class="todo-priority_options">
+              <label for="priority1{{ todo.key }}" class="{{todo.value.priority == 1 ? 'active' : ''}}">
+                High
+                <input type="radio" [(ngModel)]="todo.value.priority" (click)="closePrioritySelect()" [value]="1" id="priority1{{ todo.key }}"
+                  name="priority1{{ todo.key }}">
+              </label>
+              <label for="priority2{{ todo.key }}" class="{{todo.value.priority == 2 ? 'active' : ''}}">
+                Med
+                <input type="radio" [(ngModel)]="todo.value.priority" (click)="closePrioritySelect()" [value]="2" id="priority2{{ todo.key }}"
+                  name="priority2{{ todo.key }}">
+              </label>
+              <label for="priority3{{ todo.key }}" class="{{todo.value.priority == 3 ? 'active' : ''}}">
+                Low
+                <input type="radio" [(ngModel)]="todo.value.priority" (click)="closePrioritySelect()" [value]="3" id="priority3{{ todo.key }}"
+                  name="priority3{{ todo.key }}">
+              </label>
+            </div>
+          </div>
+
+          <div class="todo-name">
+            <div contenteditable="true" [(ngModel)]="todo.value.name" placeholder="What'cha gonna do..." class="todo-name_input"></div>
+          </div>
+          <div class="todo-done">
+            <label for="todo_completed{{ todo.key }}">
+              <svg version="1" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 342 342" *ngIf="todo.value.completed">
+                <path d="M290 33L119 204l-67-66-52 52 119 119L342 86z" />
+              </svg>
+              <input type="checkbox" [(ngModel)]="todo.value.completed" name="completed" id="todo_completed{{ todo.key }}"
+                (ngModelChange)="countIncomplete()">
+            </label>
+          </div>
+          <div class="todo-remove" (click)="delete(todo.key)">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28">
+              <path d="M28 22.4L19.6 14 28 5.6 22.4 0 14 8.4 5.6 0 0 5.6 8.4 14 0 22.4 5.6 28l8.4-8.4 8.4 8.4z" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="add_new todo-add_new" (click)="addNewTodo()">+ New todo</button>
+  </div>
+</div>
