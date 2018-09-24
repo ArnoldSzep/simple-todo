@@ -20,7 +20,7 @@
     </div>
 
     <div class="todo-items">
-      <div class="todo-item" *ngFor="let todo of todoData | keyvalue">
+      <div class="todo-item" *ngFor="let todo of todoData | keyvalue: compareFn">
         <div class="todo-item_inner {{todo.value.completed ? 'done' : ''}}" *ngIf="!todo.value.hidden">
           <div class="todo-priority">
             <div class="todo-priority_selected todo-priority_selected--{{todo.value.priority}}" (click)="prioritySelect($event)">
