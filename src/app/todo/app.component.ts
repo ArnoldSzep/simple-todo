@@ -75,6 +75,7 @@ export class AppComponent implements OnInit {
     });
 
     this.lastId++;
+    this.countIncomplete();
   }
 
   // Hide all priority select menu
