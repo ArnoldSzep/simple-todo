@@ -62,7 +62,7 @@ export class AppComponent implements OnInit {
   }
 
   // Set the keyvalue pipe's key to number, otherwise the key is a string??
-  compareFn = (a:number, b:number) => {};
+  compareFn = (a: number, b: number) => { };
 
   // Add new todo
   addNewTodo() {

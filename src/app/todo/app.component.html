@@ -31,18 +31,15 @@
             <div class="todo-priority_options">
               <label for="priority1{{ todo.key }}" class="{{todo.value.priority == 1 ? 'active' : ''}}">
                 High
-                <input type="radio" [(ngModel)]="todo.value.priority" (click)="closePrioritySelect()" [value]="1" id="priority1{{ todo.key }}"
-                  name="priority1{{ todo.key }}">
+                <input type="radio" [(ngModel)]="todo.value.priority" (click)="closePrioritySelect()" [value]="1" id="priority1{{ todo.key }}" name="priority1{{ todo.key }}">
               </label>
               <label for="priority2{{ todo.key }}" class="{{todo.value.priority == 2 ? 'active' : ''}}">
                 Med
-                <input type="radio" [(ngModel)]="todo.value.priority" (click)="closePrioritySelect()" [value]="2" id="priority2{{ todo.key }}"
-                  name="priority2{{ todo.key }}">
+                <input type="radio" [(ngModel)]="todo.value.priority" (click)="closePrioritySelect()" [value]="2" id="priority2{{ todo.key }}" name="priority2{{ todo.key }}">
               </label>
               <label for="priority3{{ todo.key }}" class="{{todo.value.priority == 3 ? 'active' : ''}}">
                 Low
-                <input type="radio" [(ngModel)]="todo.value.priority" (click)="closePrioritySelect()" [value]="3" id="priority3{{ todo.key }}"
-                  name="priority3{{ todo.key }}">
+                <input type="radio" [(ngModel)]="todo.value.priority" (click)="closePrioritySelect()" [value]="3" id="priority3{{ todo.key }}" name="priority3{{ todo.key }}">
               </label>
             </div>
           </div>
@@ -55,8 +52,7 @@
               <svg version="1" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 342 342" *ngIf="todo.value.completed">
                 <path d="M290 33L119 204l-67-66-52 52 119 119L342 86z" />
               </svg>
-              <input type="checkbox" [(ngModel)]="todo.value.completed" name="completed" id="todo_completed{{ todo.key }}"
-                (ngModelChange)="countIncomplete()">
+              <input type="checkbox" [(ngModel)]="todo.value.completed" name="completed" id="todo_completed{{ todo.key }}" (ngModelChange)="countIncomplete()">
             </label>
           </div>
           <div class="todo-remove" (click)="delete(todo.key)">
