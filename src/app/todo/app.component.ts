@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TodoItem } from './interface/todo.interface';
+import { TodoService } from './service/todo-service.service';
 
 @Component({
   selector: 'app-root',
@@ -6,52 +8,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'todo';
-  todoData = [
-    {
-      id: 0,
-      name: 'You probably haven\'t heard of them trust fund',
-      priority: 1,
-      completed: false,
-      hidden: false,
-    },
-    {
-      id: 1,
-      name: 'Occupy jianbing swag tbh hashtag',
-      priority: 3,
-      completed: true,
-      hidden: false,
-    },
-    {
-      id: 2,
-      name: 'Whatever locavore chartreuse ethical williamsburg',
-      priority: 1,
-      completed: false,
-      hidden: false,
-    },
-    {
-      id: 3,
-      name: 'Selfies glossier marfa, pitchfork twee dreamcatcher four dollar toast',
-      priority: 2,
-      completed: true,
-      hidden: false,
-    }
-  ];
-  lastId = 3;
-  incomplete = 0;
-  filter = ['All', 'Current', 'Completed'];
-  currFilter = 0;
-  order = ['Default', 'Priority [DOWN]', 'Priority [UP]'];
-  currOrder = 0;
-  itemElems;
+  public todoData: Array<TodoItem>;
+  public incomplete: number = 0;
+  public filter = ['All', 'Current', 'Completed'];
+  public currentFilter: number = 0;
+  public order = ['Default', 'Priority [DOWN]', 'Priority [UP]'];
+  public currentOrder: number = 0;
+  public lastId: number = 3;
+  public itemElements: HTMLCollectionOf<Element>;
 
-  ngOnInit() {
+  constructor(private todoService: TodoService) {
+    this.todoData = this.todoService.getTodoData();
+  }
+
+  public ngOnInit() {
     this.countIncomplete();
-    this.itemElems = document.getElementsByClassName('todo-item');
+    this.itemElements = document.getElementsByClassName('todo-item');
   }
 
   // Count the incomplete elements
-  countIncomplete() {
+  public countIncomplete() {
     this.incomplete = 0;
 
     for (let i = 0; i < this.todoData.length; i++) {
@@ -61,11 +37,8 @@ export class AppComponent implements OnInit {
     }
   }
 
-  // Set the keyvalue pipe's key to number, otherwise the key is a string??
-  compareFn = (a: number, b: number) => { };
-
   // Add new todo
-  addNewTodo() {
+  public addNewTodo() {
     this.todoData.push({
       id: this.lastId + 1,
       name: '',
@@ -79,51 +52,51 @@ export class AppComponent implements OnInit {
   }
 
   // Hide all priority select menu
-  closePrioritySelect() {
-    for (let i = 0; i < this.itemElems.length; i++) {
-      this.itemElems[i].getElementsByClassName('todo-priority_options')[0].classList.remove('active');
+  public closePrioritySelect() {
+    for (let i = 0; i < this.itemElements.length; i++) {
+      this.itemElements[i].getElementsByClassName('todo-priority_options')[0].classList.remove('active');
     }
   }
 
   // Open current priority select menu
-  prioritySelect(ev) {
+  public prioritySelect(event) {
     this.closePrioritySelect();
-    ev.target.nextElementSibling.classList.add('active');
+    event.target.nextElementSibling.classList.add('active');
   }
 
   // Delete by key
-  delete(key) {
+  public delete(key: number) {
     this.todoData.splice(key, 1);
   }
 
   // Filter list by "completed"
-  filterList() {
+  public filterList() {
     for (let i = 0; i < this.todoData.length; i++) {
       this.todoData[i].hidden = false;
 
-      if (this.currFilter == 0) {
+      if (this.currentFilter === 0) {
         if (this.todoData[i].completed) {
           this.todoData[i].hidden = true;
         }
       }
 
-      if (this.currFilter == 1) {
+      if (this.currentFilter === 1) {
         if (!this.todoData[i].completed) {
           this.todoData[i].hidden = true;
         }
       }
     }
 
-    if (this.currFilter < 2) {
-      this.currFilter++;
+    if (this.currentFilter < 2) {
+      this.currentFilter++;
     } else {
-      this.currFilter = 0;
+      this.currentFilter = 0;
     }
   }
 
   // Order list by priority
-  orderList() {
-    let sortBy = [
+  public orderList() {
+    const sortBy = [
       function priorityDown(a, b) {
         return a.priority - b.priority;
       },
@@ -135,12 +108,12 @@ export class AppComponent implements OnInit {
       }
     ];
 
-    this.todoData = this.todoData.sort(sortBy[this.currOrder]);
+    this.todoData = this.todoData.sort(sortBy[this.currentOrder]);
 
-    if (this.currOrder < 2) {
-      this.currOrder++;
+    if (this.currentOrder < 2) {
+      this.currentOrder++;
     } else {
-      this.currOrder = 0;
+      this.currentOrder = 0;
     }
   }
 }

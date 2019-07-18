@@ -1,11 +1,10 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
-import { AppComponent } from './app.component';
+import { DebugElement } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { ContenteditableModule } from 'ng-contenteditable';
-import { DebugElement } from '@angular/core';
+import { AppComponent } from './app.component';
 
 describe('Todo', () => {
-
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
   let de: DebugElement;
@@ -36,26 +35,11 @@ describe('Todo', () => {
   });
 
   it('should add new task', () => {
-    let prevId = component.lastId;
-    let todoDataCount = component.todoData.length;
+    const prevId = component.lastId;
+    const todoDataCount = component.todoData.length;
     component.addNewTodo();
 
     expect(component.lastId).toBe(prevId + 1);
     expect(component.todoData.length).toBe(todoDataCount + 1);
   });
-
-
-  /*
-    it(`should have as title 'todo'`, async(() => {
-      const fixture = TestBed.createComponent(AppComponent);
-      const app = fixture.debugElement.componentInstance;
-      expect(app.title).toEqual('todo');
-    }));
-    it('should render title in a h1 tag', async(() => {
-      const fixture = TestBed.createComponent(AppComponent);
-      fixture.detectChanges();
-      const compiled = fixture.debugElement.nativeElement;
-      expect(compiled.querySelector('h1').textContent).toContain('Welcome to todo!');
-    }));
-    */
 });

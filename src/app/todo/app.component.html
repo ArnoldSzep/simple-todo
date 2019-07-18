@@ -15,12 +15,12 @@
     </div>
 
     <div class="todo-filter">
-      <div class="todo-order" (click)="orderList()">Order: <span>{{order[currOrder]}}</span></div>
-      <div class="todo-show" (click)="filterList()">Show: <span>{{filter[currFilter]}}</span></div>
+      <div class="todo-order" (click)="orderList()">Order: <span>{{order[currentOrder]}}</span></div>
+      <div class="todo-show" (click)="filterList()">Show: <span>{{filter[currentFilter]}}</span></div>
     </div>
 
     <div class="todo-items">
-      <div class="todo-item" *ngFor="let todo of todoData | keyvalue: compareFn">
+      <div class="todo-item" *ngFor="let todo of todoData | keyvalue">
         <div class="todo-item_inner {{todo.value.completed ? 'done' : ''}}" *ngIf="!todo.value.hidden">
           <div class="todo-priority">
             <div class="todo-priority_selected todo-priority_selected--{{todo.value.priority}}" (click)="prioritySelect($event)">
