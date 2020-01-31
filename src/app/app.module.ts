@@ -4,14 +4,17 @@ import { FormsModule } from '@angular/forms';
 import { ContenteditableModule } from 'ng-contenteditable';
 
 import { AppComponent } from './todo/app.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
+    HttpClientModule,
     ContenteditableModule,
-    BrowserModule, FormsModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -19,7 +19,7 @@
       <div class="todo-show" (click)="filterList()">Show: <span>{{filter[currentFilter]}}</span></div>
     </div>
 
-    <div class="todo-items">
+    <div class="todo-items" *ngIf="todoData">
       <div class="todo-item" *ngFor="let todo of todoData | keyvalue">
         <div class="todo-item_inner {{todo.value.completed ? 'done' : ''}}" *ngIf="!todo.value.hidden">
           <div class="todo-priority">

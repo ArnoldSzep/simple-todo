@@ -17,13 +17,14 @@ export class AppComponent implements OnInit {
   public lastId: number = 3;
   public itemElements: HTMLCollectionOf<Element>;
 
-  constructor(private todoService: TodoService) {
-    this.todoData = this.todoService.getTodoData();
-  }
+  constructor(private todoService: TodoService) { }
 
   public ngOnInit() {
-    this.countIncomplete();
-    this.itemElements = document.getElementsByClassName('todo-item');
+    this.todoService.getTodoData().subscribe((todoData) => {
+      this.todoData = todoData;
+      this.countIncomplete();
+      this.itemElements = document.getElementsByClassName('todo-item');
+    });
   }
 
   // Count the incomplete elements
