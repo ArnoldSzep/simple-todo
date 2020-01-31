@@ -68,6 +68,7 @@ export class AppComponent implements OnInit {
   // Delete by key
   public delete(key: number) {
     this.todoData.splice(key, 1);
+    this.countIncomplete();
   }
 
   // Filter list by "completed"

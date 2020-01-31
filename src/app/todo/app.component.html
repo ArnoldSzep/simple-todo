@@ -9,8 +9,11 @@
       <h1>
         Welcome!
       </h1>
-      <h2>
+      <h2 *ngIf="incomplete > 0">
         You have <u>{{incomplete}}</u> <br>remaining task<span *ngIf="incomplete > 1">s</span>!
+      </h2>
+      <h2 *ngIf="incomplete == 0">
+        Congratulations!<br>No more tasks!
       </h2>
     </div>
 
